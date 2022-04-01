@@ -23,7 +23,7 @@
                 <button id="delete"> Delete </button>
                 <button id="update"> Update </button>
                 <button id="deleteall"> Delete All </button>
-                <button onclick="location.href='classes/backup.php'";> Backup </button>
+                <button onclick="location.href='src/backup.php'";> Backup </button>
                 <button> HISTORY </button>
                 <button id="refresh"> Refresh </button>
             </section>
