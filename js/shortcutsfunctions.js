@@ -132,7 +132,7 @@ var shortcutsfunctions = {};
 
                 $.ajax({
                     type: 'POST',
-                    url: "http://comercialanny.com/inventory/classes/insert.php",
+                    url: "http://comercialanny.com/inventory/src/insert.php",
                     data: inputs,
                     dataType: 'json',
                     success: function(result) {
@@ -379,7 +379,7 @@ var shortcutsfunctions = {};
 
     shortcutsfunctions.refresh = () => {
         $.get(
-            "classes/displaydb.php",
+            "src/displaydb.php",
             (data) => {
                 $( '#inventorydisplay' ).html(data);
             }
@@ -518,7 +518,7 @@ var shortcutsfunctions = {};
                 console.log(inputs);
                 $.ajax({
                     type: 'POST',
-                    url: "http://comercialanny.com/inventory/classes/update.php",
+                    url: "http://comercialanny.com/inventory/src/update.php",
                     data: inputs,
                     dataType: 'json',
                     success: function(result) {
@@ -535,7 +535,7 @@ var shortcutsfunctions = {};
         if(nameinput.value !== null){
             $.ajax({
                 type: 'POST',
-                url: "http://comercialanny.com/inventory/classes/select.php",
+                url: "http://comercialanny.com/inventory/src/select.php",
                 data: {"name": nameinput.value},
                 dataType: 'json',
                 success: function(result) {
@@ -576,7 +576,7 @@ var shortcutsfunctions = {};
         nameinput.onkeyup = () => {
             $.ajax({
                 type: 'POST',
-                url: "http://comercialanny.com/inventory/classes/select.php",
+                url: "http://comercialanny.com/inventory/src/select.php",
                 data: {"name": nameinput.value},
                 dataType: 'json',
                 success: function(result) {
