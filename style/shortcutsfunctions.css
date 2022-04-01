@@ -1,0 +1,37 @@
+* {
+    box-sizing: border-box;
+}
+
+.modalcontent {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    margin-top: 10px;
+    height: 80vh;
+    overflow-y: auto;
+}
+
+.modalcontent label {
+    flex: 1 0 35%;
+    margin: 10px 0px 10px 30px;
+}
+
+.modalcontent summary {
+    width: 100%;
+    margin-top: 5px;
+    text-align: center;
+}
+
+.modalcontent input {
+    margin-right: 30px;
+    width: 50%;
+    padding: 5px;
+}
+
+@media only screen and (max-width: 399px){
+    .modalcontent label {
+        flex: 1 0 25%;
+        margin: 10px 0px 10px 30px;
+    }
+}

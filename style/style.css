@@ -1,0 +1,112 @@
+    * {
+        box-sizing: border-box;
+    }
+    
+    html,
+    body {
+        margin: 0;
+        padding: 0;
+        height: 100vh;
+        background-color: white;
+    }
+    
+    .content {
+        display: flex;
+        flex-direction: column;
+    }
+    
+    .navbar {
+        position: relative;
+        background-color: lightgreen;
+        padding: 15px;
+        color: black;
+        text-align: center;
+        font-size: 2rem;
+        z-index: 2;
+    }
+    
+    .shortcutscontainer {
+        position: relative;
+        background-color: white;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        border-top: 2px solid black;
+        border-bottom: 2px solid black;
+    }
+    
+    .shortcuts {
+        padding: 15px;
+        width: 100%;
+        height: auto;
+        display: flex;
+        flex-wrap: wrap;
+        align-content: flex-start;
+    }
+    
+    .shortcuts button {
+        width: auto;
+        height: 50px;
+        border: none;
+        border-radius: 2px;
+        background-color: darkgrey;
+        margin: 3px;
+        flex: 1 0 20%;
+    }
+    
+    .displaybutton {
+        border: none;
+        width: 30%;
+        height: 30px;
+        background-color: darkgrey;
+    }
+    
+    .inventorydisplay {
+        position: relative;
+        width: 100%;
+        overflow-x: auto;
+        overflow-y: auto;
+    }
+    
+    .inventorydisplay table {
+        width: 100%;
+        margin-top: 10px;
+        border-collapse: collapse;
+        color: black;
+    }
+    
+    .inventorydisplay table img{
+        width: 100px;
+        height: 100px;
+    }
+    
+    .inventorydisplay td,
+    th {
+        border: 1px solid black;
+        text-align: center;
+        padding: 5px;
+        /*width: 8.33%;*/
+    }
+    
+    .modal {
+        display: none;
+        /* Hidden by default */
+        position: fixed;
+        /* Stay in place */
+        z-index: 3;
+        /* Sit on top */
+        left: 0;
+        top: 30px;
+        width: 100%;
+        /* Full width */
+        overflow: auto;
+        /* Enable scroll if needed */
+        background-color: white;
+    }
+    
+    .modal button {
+        width: 100%;
+        border: none;
+        color: white;
+        background-color: rgb(80, 80, 80);
+    }
