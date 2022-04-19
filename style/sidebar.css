@@ -1,0 +1,29 @@
+.sidebar {
+    width: 55px;
+    height: 100vh;
+    display: flex;
+    padding: 0.45rem;
+    background-color: black;
+}
+
+.sidebar ul{
+    list-style: none;
+    margin: 0px;
+    padding: 0px;
+}
+
+.sidebar li{
+}
+
+.sidebar li a{
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: white;
+    list-style: none;
+    font-size: 20px;
+}
+
+.sidebar:hover {
+    width: max-content;
+}

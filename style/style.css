@@ -6,24 +6,20 @@ html,
 body {
     margin: 0;
     padding: 0;
-    height: 100vh;
-    background-color: white;
+    background-color: lightgrey;
     scroll-behavior: smooth;
 }
 
 .content {
-    display: flex;
-    flex-direction: column;
+    display: block;
 }
 
 .navbar {
-    position: relative;
     background-color: lightgreen;
     padding: 15px;
     color: black;
     text-align: center;
-    font-size: 2rem;
-    z-index: 3;
+    font-size: 20px;
 }
 
 .shortcutscontainer {
