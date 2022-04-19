@@ -4,7 +4,7 @@ var shortcutsfunctions = {};
 
 (function() {
 
-    shortcutsfunctions.add = function() {
+    shortcutsfunctions.add = function(obj) {
         var content = document.createElement("div");
         content.classList.add("modalcontent")
 
@@ -14,14 +14,14 @@ var shortcutsfunctions = {};
         title.style.width = "100%";
         title.style.margin = "0px 0px 10px 0px";
         title.style.textAlign = "center";
-        title.innerHTML = "Add";
+        title.innerHTML = "添加>>"+obj;
         content.appendChild(title);
 
         const br = document.createElement('br');
         content.appendChild(br);
 
         var name = document.createElement("label");
-        name.innerHTML = "Name";
+        name.innerHTML = "名字";
         content.appendChild(name);
 
         var nameinput = document.createElement("input");
@@ -30,7 +30,7 @@ var shortcutsfunctions = {};
         content.appendChild(br);
 
         var type = document.createElement("label");
-        type.innerHTML = "Product Type";
+        type.innerHTML = "品种";
         content.appendChild(type);
 
         var typeinput = document.createElement("input");
@@ -39,21 +39,21 @@ var shortcutsfunctions = {};
         content.appendChild(br);
         
         var img = document.createElement("label");
-        img.innerHTML = "Img Url";
+        img.innerHTML = "图片地址";
         content.appendChild(img);
 
         var imginput = document.createElement("input");
         content.appendChild(imginput);
 
         var ctns = document.createElement("label");
-        ctns.innerHTML = "CTN";
+        ctns.innerHTML = "箱数";
         content.appendChild(ctns);
 
         var ctnsinput = document.createElement("input");
         content.appendChild(ctnsinput);
 
         var quantity = document.createElement("label");
-        quantity.innerHTML = "QTY";
+        quantity.innerHTML = "箱量";
         content.appendChild(quantity);
 
         var quantityinput = document.createElement("input");
@@ -67,35 +67,35 @@ var shortcutsfunctions = {};
         content.appendChild(totalinput); */
 
         var entrydate = document.createElement("label");
-        entrydate.innerHTML = "Shipped In Date";
+        entrydate.innerHTML = "进货日";
         content.appendChild(entrydate);
 
         var entrydateinput = document.createElement("input");
         content.appendChild(entrydateinput);
         
         var entryprice = document.createElement("label");
-        entryprice.innerHTML = "Purchase Date";
+        entryprice.innerHTML = "进货价";
         content.appendChild(entryprice);
 
         var entrypriceinput = document.createElement("input");
         content.appendChild(entrypriceinput);
 
         var exportctns = document.createElement("label");
-        exportctns.innerHTML = "Shipped CTN";
+        exportctns.innerHTML = "出货箱数";
         content.appendChild(exportctns);
 
         var exportctnsinput = document.createElement("input");
         content.appendChild(exportctnsinput);
         
         var exportprice = document.createElement("label");
-        exportprice.innerHTML = "Shipping Price";
+        exportprice.innerHTML = "出货价";
         content.appendChild(exportprice);
 
         var exportpriceinput = document.createElement("input");
         content.appendChild(exportpriceinput);
 
         var notes = document.createElement("label");
-        notes.innerHTML = "Note";
+        notes.innerHTML = "附注";
         content.appendChild(notes);
 
         var notesinput = document.createElement("input");
@@ -113,9 +113,10 @@ var shortcutsfunctions = {};
 
         submit.onclick = () => {
             if(nameinput.value === ""){
-                errormsg.innerHTML = "Enter name at least";
+                errormsg.innerHTML = "至少输入货名";
             }else{
                 var inputs = {
+                    "dbtable": obj,
                     "name": nameinput.value,
                     "type": typeinput.value,
                     "img": imginput.value,
@@ -128,19 +129,16 @@ var shortcutsfunctions = {};
                     "notes": notesinput.value
                 };
 
-                console.log(inputs);
-
                 $.ajax({
                     type: 'POST',
-                    url: "http://comercialanny.com/inventory/src/insert.php",
+                    url: "classes/insert.php",
                     data: inputs,
                     dataType: 'json',
                     success: function(result) {
-                        errormsg.innerHTML = "Server+： " + result.response;
-                        shortcutsfunctions.refresh();
+                        errormsg.innerHTML = "服务器+： " + result.response;
                     },
                     error: function(xhr, status, error){
-                        errormsg.innerHTML = "Server-： " + xhr + "</br>" + status + "</br>" + error;
+                        errormsg.innerHTML = "服务器-： " + xhr + "</br>" + status + "</br>" + error;
                     }
                 });
             }
@@ -149,7 +147,7 @@ var shortcutsfunctions = {};
         return content;
     }
 
-    shortcutsfunctions.delete = function(inputname){
+    shortcutsfunctions.delete = function(dbtablename, dbtable, inputname){
         var content = document.createElement("div");
         content.classList.add("modalcontent")
 
@@ -158,22 +156,19 @@ var shortcutsfunctions = {};
         title.style.marginLeft = "0px";
         title.style.marginTop = "0px";
         title.style.textAlign = "center";
-        title.innerHTML = "Delete";
+        title.innerHTML = "删除 > " + dbtablename +" > " + inputname;
         content.appendChild(title);
         
-        //search 
         var name = document.createElement("label");
-        name.innerHTML = "Name";
+        name.innerHTML = "名字";
         content.appendChild(name);
 
         var nameinput = document.createElement("input");
-        if(inputname!==null){
-            nameinput.value = inputname;
-        }
+        nameinput.value = inputname || "";
         content.appendChild(nameinput);
 
         var type = document.createElement("label");
-        type.innerHTML = "Product Type";
+        type.innerHTML = "品种";
         content.appendChild(type);
 
         var typeinput = document.createElement("input");
@@ -181,16 +176,15 @@ var shortcutsfunctions = {};
         content.appendChild(typeinput);
         
         var img = document.createElement("label");
-        img.innerHTML = "Img Url";
+        img.innerHTML = "图片地址";
         content.appendChild(img);
 
         var imginput = document.createElement("input");
         imginput.disabled = true;
         content.appendChild(imginput);
 
-
         var ctns = document.createElement("label");
-        ctns.innerHTML = "CTN";
+        ctns.innerHTML = "箱数";
         content.appendChild(ctns);
 
         var ctnsinput = document.createElement("input");
@@ -198,7 +192,7 @@ var shortcutsfunctions = {};
         content.appendChild(ctnsinput);
 
         var quantity = document.createElement("label");
-        quantity.innerHTML = "QTY";
+        quantity.innerHTML = "箱量";
         content.appendChild(quantity);
 
         var quantityinput = document.createElement("input");
@@ -206,7 +200,7 @@ var shortcutsfunctions = {};
         content.appendChild(quantityinput);
         
         var total = document.createElement("label");
-        total.innerHTML = "Total";
+        total.innerHTML = "总数量";
         content.appendChild(total);
 
         var totalinput = document.createElement("input");
@@ -214,7 +208,7 @@ var shortcutsfunctions = {};
         content.appendChild(totalinput);
 
         var entrydate = document.createElement("label");
-        entrydate.innerHTML = "Shipped In Date";
+        entrydate.innerHTML = "进货日";
         content.appendChild(entrydate);
 
         var entrydateinput = document.createElement("input");
@@ -222,7 +216,7 @@ var shortcutsfunctions = {};
         content.appendChild(entrydateinput);
         
         var entryprice = document.createElement("label");
-        entryprice.innerHTML = "Purchase Price";
+        entryprice.innerHTML = "进货价";
         content.appendChild(entryprice);
 
         var entrypriceinput = document.createElement("input");
@@ -230,7 +224,7 @@ var shortcutsfunctions = {};
         content.appendChild(entrypriceinput);
 
         var exportctns = document.createElement("label");
-        exportctns.innerHTML = "Shipped Out Date";
+        exportctns.innerHTML = "出货箱数";
         content.appendChild(exportctns);
 
         var exportctnsinput = document.createElement("input");
@@ -238,7 +232,7 @@ var shortcutsfunctions = {};
         content.appendChild(exportctnsinput);
         
         var exportprice = document.createElement("label");
-        exportprice.innerHTML = "Shipping Price";
+        exportprice.innerHTML = "出货价";
         content.appendChild(exportprice);
 
         var exportpriceinput = document.createElement("input");
@@ -246,7 +240,7 @@ var shortcutsfunctions = {};
         content.appendChild(exportpriceinput);
         
         var currenttotal = document.createElement("label");
-        currenttotal.innerHTML = "Current CTN";
+        currenttotal.innerHTML = "现总箱数";
         content.appendChild(currenttotal);
 
         var currenttotalinput = document.createElement("input");
@@ -254,7 +248,7 @@ var shortcutsfunctions = {};
         content.appendChild(currenttotalinput);
 
         var notes = document.createElement("label");
-        notes.innerHTML = "Note";
+        notes.innerHTML = "附注";
         content.appendChild(notes);
 
         var notesinput = document.createElement("input");
@@ -273,62 +267,58 @@ var shortcutsfunctions = {};
 
         submit.onclick = () => {
             if(nameinput.value === ""){
-                errormsg.innerHTML = "Enter Product Name at least";
+                errormsg.innerHTML = "至少输入货名";
             }else{
                 $.ajax({
                     type: 'POST',
-                    url: "http://comercialanny.com/inventory/src/delete.php",
-                    data: {name:nameinput.value},
+                    url: "classes/delete.php",
+                    data: { "dbtable": dbtable, "name":nameinput.value},
                     dataType: 'json',
                     success: function(result) {
-                        errormsg.innerHTML = "Server+： " + result.response;
-                        shortcutsfunctions.refresh();
+                        errormsg.innerHTML = "服务器+： " + result.response;
                     },
                     error: function(xhr, status, error){
-                        errormsg.innerHTML = "Server-： " + xhr + "</br>" + status + "</br>" + error;
-                        console.log("xhr");
-                        console.log(xhr);
+                        errormsg.innerHTML = "服务器-： " + xhr + "</br>" + status + "</br>" + error;
                     }
                 });
             }
         }
-        if(nameinput.value !== null){
+
+        if(nameinput !== ""){
             $.ajax({
                 type: 'POST',
-                url: "http://comercialanny.com/inventory/src/select.php",
-                data: {"name": nameinput.value},
+                url: "classes/select.php",
+                data: {"name": nameinput.value, "dbtable": dbtable},
                 dataType: 'json',
                 success: function(result) {
-                        if(result.response !== "Not Found"){
-                            errormsg.innerHTML = "Server+： " + result.response;
-                            typeinput.value = result['data'].type;
-                            imginput.value = result['data'].img;
-                            ctnsinput.value = result['data'].ctns;
-                            quantityinput.value = result['data'].quantity;
-                            totalinput.value = result['data'].ctns * result['data'].quantity;
-                            entrydateinput.value = result['data'].entrydate;
-                            entrypriceinput.value = result['data'].entryprice;
-                            exportctnsinput.value = result['data'].exportctns;
-                            exportpriceinput.value = result['data'].exportprice;
-                            currenttotalinput.value = result['data'].ctns - result['data'].exportctns;
-                        }else{
-                            errormsg.innerHTML = "Not Found+： " + result.response;
-                            typeinput.value = "";
-                            imginput.value = "";
-                            ctnsinput.value = "";
-                            quantityinput.value = "";
-                            totalinput.value = "";
-                            entrydateinput.value = "";
-                            entrypriceinput.value = "";
-                            exportctnsinput.value = "";
-                            exportpriceinput.value = "";
-                            currenttotalinput.value = "";
-                        }
-                        
-                        
-                    },
+                    if(result.response === "找到了"){
+                        errormsg.innerHTML = "服务器++： " + result.response;
+                        typeinput.value = result['data'].type;
+                        imginput.value = result['data'].img;
+                        ctnsinput.value = result['data'].ctns;
+                        quantityinput.value = result['data'].quantity;
+                        totalinput.value = result['data'].ctns * result['data'].quantity;
+                        entrydateinput.value = result['data'].entrydate;
+                        entrypriceinput.value = result['data'].entryprice;
+                        exportctnsinput.value = result['data'].exportctns;
+                        exportpriceinput.value = result['data'].exportprice;
+                        currenttotalinput.value = result['data'].ctns - result['data'].exportctns;
+                    }else{
+                        errormsg.innerHTML = "服务器+-： " + result.response;
+                        typeinput.value = "";
+                        imginput.value = "";
+                        ctnsinput.value = "";
+                        quantityinput.value = "";
+                        totalinput.value = "";
+                        entrydateinput.value = "";
+                        entrypriceinput.value = "";
+                        exportctnsinput.value = "";
+                        exportpriceinput.value = "";
+                        currenttotalinput.value = "";
+                    }
+                },
                     error: function(xhr, status, error){
-                        errormsg.innerHTML = "Server-： " + error;
+                        errormsg.innerHTML = "服务器-： " + error;
                     }
             });
         }
@@ -336,12 +326,12 @@ var shortcutsfunctions = {};
         nameinput.onkeyup = () => {
             $.ajax({
                 type: 'POST',
-                url: "http://comercialanny.com/inventory/src/select.php",
+                url: "classes/select.php",
                 data: {"name": nameinput.value},
                 dataType: 'json',
                 success: function(result) {
-                        if(result.response !== "Not Found"){
-                            errormsg.innerHTML = "Server+： " + result.response;
+                        if(result.response !== "找不到"){
+                            errormsg.innerHTML = "服务器+： " + result.response;
                             typeinput.value = result['data'].type;
                             imginput.value = result['data'].img;
                             ctnsinput.value = result['data'].ctns;
@@ -353,7 +343,7 @@ var shortcutsfunctions = {};
                             exportpriceinput.value = result['data'].exportprice;
                             currenttotalinput.value = result['data'].ctns - result['data'].exportctns;
                         }else{
-                            errormsg.innerHTML = "Server+： " + result.response;
+                            errormsg.innerHTML = "服务器+： " + result.response;
                             typeinput.value = "";
                             imginput.value = "";
                             ctnsinput.value = "";
@@ -369,7 +359,7 @@ var shortcutsfunctions = {};
                         
                     },
                     error: function(xhr, status, error){
-                        errormsg.innerHTML = "Server-： " + error;
+                        errormsg.innerHTML = "服务器-： " + error;
                     }
             });
         }
@@ -377,17 +367,19 @@ var shortcutsfunctions = {};
         return content;
     }
 
-    shortcutsfunctions.refresh = () => {
-        $.get(
-            "src/displaydb.php",
-            (data) => {
+    shortcutsfunctions.refresh = (db, needle) => {
+        console.log(db+" "+needle)
+        $.ajax({ 
+            type: "POST",
+            url: "classes/displaydb.php",
+            data: {dbpath: db, needle: needle},
+            success: (data)=>{
                 $( '#inventorydisplay' ).html(data);
             }
-        )
-        
+        })
     }
 
-    shortcutsfunctions.update = (inputname) => {
+    shortcutsfunctions.update = (dbtablename, obj, inputname) => {
         var content = document.createElement("div");
         content.classList.add("modalcontent")
         
@@ -396,50 +388,48 @@ var shortcutsfunctions = {};
         title.style.marginLeft = "0px";
         title.style.marginTop = "0px";
         title.style.textAlign = "center";
-        title.innerHTML = "Update";
+        title.innerHTML = "更新 >> "+dbtablename+" >> "+inputname;
         content.appendChild(title);
         
         //search 
         var name = document.createElement("label");
-        name.innerHTML = "Name";
+        name.innerHTML = "名字";
         content.appendChild(name);
 
         var nameinput = document.createElement("input");
-        if(inputname!== null){
-            nameinput.value = inputname;
-        }
+        nameinput.value = inputname || "";
         content.appendChild(nameinput);
 
         var type = document.createElement("label");
-        type.innerHTML = "Product Type";
+        type.innerHTML = "品种";
         content.appendChild(type);
 
         var typeinput = document.createElement("input");
         content.appendChild(typeinput);
         
         var img = document.createElement("label");
-        img.innerHTML = "Image Url";
+        img.innerHTML = "图片地址";
         content.appendChild(img);
 
         var imginput = document.createElement("input");
         content.appendChild(imginput);
 
         var ctns = document.createElement("label");
-        ctns.innerHTML = "CTN";
+        ctns.innerHTML = "箱数";
         content.appendChild(ctns);
 
         var ctnsinput = document.createElement("input");
         content.appendChild(ctnsinput);
 
         var quantity = document.createElement("label");
-        quantity.innerHTML = "QTY";
+        quantity.innerHTML = "箱量";
         content.appendChild(quantity);
 
         var quantityinput = document.createElement("input");
         content.appendChild(quantityinput);
         
         var total = document.createElement("label");
-        total.innerHTML = "Total";
+        total.innerHTML = "总数量";
         content.appendChild(total);
 
         var totalinput = document.createElement("input");
@@ -447,7 +437,7 @@ var shortcutsfunctions = {};
         content.appendChild(totalinput);
 
         var entrydate = document.createElement("label");
-        entrydate.innerHTML = "Shipped In Date";
+        entrydate.innerHTML = "进货日";
         content.appendChild(entrydate);
 
         var entrydateinput = document.createElement("input");
@@ -461,21 +451,21 @@ var shortcutsfunctions = {};
         content.appendChild(entrypriceinput);
 
         var exportctns = document.createElement("label");
-        exportctns.innerHTML = "Purchase Price";
+        exportctns.innerHTML = "出货箱数";
         content.appendChild(exportctns);
 
         var exportctnsinput = document.createElement("input");
         content.appendChild(exportctnsinput);
         
         var exportprice = document.createElement("label");
-        exportprice.innerHTML = "Shipping Price";
+        exportprice.innerHTML = "出货价";
         content.appendChild(exportprice);
 
         var exportpriceinput = document.createElement("input");
         content.appendChild(exportpriceinput);
         
         var currenttotal = document.createElement("label");
-        currenttotal.innerHTML = "Current CTN";
+        currenttotal.innerHTML = "现总箱数";
         content.appendChild(currenttotal);
 
         var currenttotalinput = document.createElement("input");
@@ -483,7 +473,7 @@ var shortcutsfunctions = {};
         content.appendChild(currenttotalinput);
 
         var notes = document.createElement("label");
-        notes.innerHTML = "Note";
+        notes.innerHTML = "附注";
         content.appendChild(notes);
 
         var notesinput = document.createElement("input");
@@ -501,9 +491,10 @@ var shortcutsfunctions = {};
 
         submit.onclick = () => {
             if(nameinput.value === ""){
-                errormsg.innerHTML = "Enter name at least";
+                errormsg.innerHTML = "至少输入商品名字";
             }else{
                 var inputs = {
+                    "dbtable": obj,
                     "name": nameinput.value,
                     "type": typeinput.value,
                     "img": imginput.value,
@@ -515,32 +506,30 @@ var shortcutsfunctions = {};
                     "exportprice": exportpriceinput.value,
                     "notes": notesinput.value
                 };
-                console.log(inputs);
                 $.ajax({
                     type: 'POST',
-                    url: "http://comercialanny.com/inventory/src/update.php",
+                    url: "classes/update.php",
                     data: inputs,
                     dataType: 'json',
                     success: function(result) {
-                        errormsg.innerHTML = "Server+： " + result.response;
-                        shortcutsfunctions.refresh();
+                        errormsg.innerHTML = "服务器更新+： " + result.response;
                     },
                     error: function(xhr, statuts, error){
-                        errormsg.innerHTML = "Server-： " + xhr + " " +error;
+                        errormsg.innerHTML = "服务器更新-： " + xhr + " " +error;
                     }
                 });
             }
         }
 
-        if(nameinput.value !== null){
+        if(nameinput.value != ""){
             $.ajax({
                 type: 'POST',
-                url: "http://comercialanny.com/inventory/src/select.php",
-                data: {"name": nameinput.value},
+                url: "classes/select.php",
+                data: {"dbtable": obj, "name": nameinput.value},
                 dataType: 'json',
                 success: function(result) {
-                        if(result.response !== "Not Found"){
-                            errormsg.innerHTML = "Server+： " + result.response;
+                        if(result.response !== "找不到"){
+                            errormsg.innerHTML = "服务器+： " + result.response;
                             typeinput.value = result['data'].type;
                             imginput.value = result['data'].img;
                             ctnsinput.value = result['data'].ctns;
@@ -552,7 +541,7 @@ var shortcutsfunctions = {};
                             exportpriceinput.value = result['data'].exportprice;
                             currenttotalinput.value = result['data'].ctns - result['data'].exportctns;
                         }else{
-                            errormsg.innerHTML = "Server+： " + result.response;
+                            errormsg.innerHTML = "服务器+： " + result.response;
                             typeinput.value = "";
                             imginput.value = "";
                             ctnsinput.value = "";
@@ -568,7 +557,7 @@ var shortcutsfunctions = {};
                         
                     },
                     error: function(xhr, status, error){
-                        errormsg.innerHTML = "Server-： " + error;
+                        errormsg.innerHTML = "服务器-： " + error;
                     }
             });
         }
@@ -576,12 +565,12 @@ var shortcutsfunctions = {};
         nameinput.onkeyup = () => {
             $.ajax({
                 type: 'POST',
-                url: "http://comercialanny.com/inventory/src/select.php",
-                data: {"name": nameinput.value},
+                url: "classes/select.php",
+                data: {"dbtable": obj,"name": nameinput.value},
                 dataType: 'json',
                 success: function(result) {
-                        if(result.response !== "Not Found"){
-                            errormsg.innerHTML = "Server+： " + result.response;
+                        if(result.response !== "找不到"){
+                            errormsg.innerHTML = "服务器+： " + result.response;
                             typeinput.value = result['data'].type;
                             imginput.value = result['data'].img;
                             ctnsinput.value = result['data'].ctns;
@@ -593,7 +582,8 @@ var shortcutsfunctions = {};
                             exportpriceinput.value = result['data'].exportprice;
                             currenttotalinput.value = result['data'].ctns - result['data'].exportctns;
                         }else{
-                            errormsg.innerHTML = "Server+： " + result.response;
+                            title.innerHTML = "更新 >> "+obj+" >> "+ nameinput.value;
+                            errormsg.innerHTML = "服务器+： " + result.response;
                             typeinput.value = "";
                             imginput.value = "";
                             ctnsinput.value = "";
@@ -609,14 +599,14 @@ var shortcutsfunctions = {};
                         
                     },
                     error: function(xhr, status, error){
-                        errormsg.innerHTML = "Server-： " + error;
+                        errormsg.innerHTML = "服务器-： " + error;
                     }
             });
         }
         return content;
     }
     
-    shortcutsfunctions.deleteall = () => {
+    shortcutsfunctions.deleteall = (obj) => {
         var content = document.createElement("div");
         content.classList.add("modalcontent")
         content.style.width = "100%";
@@ -626,11 +616,8 @@ var shortcutsfunctions = {};
         title.style.fontSize = "20px";
         title.style.flex = "none";
         title.style.margin = "0px 10px 0px 0px";
-        title.innerHTML = "Delete All?";
+        title.innerHTML = "全部清除?";
         content.appendChild(title);
-        
-        var password = document.createElement("input");
-        content.appendChild(password);
         
         var comfirmbtn = document.createElement("btn");
         comfirmbtn.innerHTML = "OK";
@@ -639,16 +626,83 @@ var shortcutsfunctions = {};
         comfirmbtn.style.padding = "10px";
         content.appendChild(comfirmbtn);
         
-        /*comfirmbtn.onclick = () => {
+        comfirmbtn.onclick = () => {
             $.ajax({
                 url: "http://comercialanny.com/inventory/classes/deleteall.php",
                 success: () => {
                     alert("清除成功");
-                    shortcutsfunctions.refresh();
                 }
             })
-        }*/
+        }
         
         return content;
+    }
+
+    shortcutsfunctions.modalclose = () => {
+        let modal = document.getElementById("modal");
+        modal.style.display = "none";
+        modal.removeChild(modal.lastChild);
+        //document.getElementById("inventorydisplay").innerHTML = 
+        //    "<h1 style='color: black; width: 100%; text-Align: center;'>LOADING</h1>";
+        //shortcutsfunctions.refresh();
+    }
+
+    /* shortcutsfunctions.displayshortcuts = () => {
+        let sc = document.getElementById("shortcutscontainer");
+        if (sc.offsetTop <= -72) {
+            let pos = 140;
+        let transition = setInterval(() => {
+            if (pos <= 0) {
+                clearInterval(transition);
+            } else {
+                pos -= 20;
+                sc.style.bottom = pos + "px";
+                sc.style.marginBottom = -pos + "px";
+            }
+        }, 5);
+        } else {
+            let pos = 0;
+        let transition = setInterval(() => {
+            if (pos >= 130) {
+                clearInterval(transition);
+            } else {
+                pos += 20;
+                sc.style.bottom = pos + "px";
+                sc.style.marginBottom = -pos + "px";
+            }
+        }, 5);
+        }
+    } */
+
+    shortcutsfunctions.adddata = () => {
+        let modal = document.getElementById("modal");
+        modal.style.display = "block";
+        modal.appendChild(shortcutsfunctions.add(dbselectionobj.currentdbtable));
+    }
+    
+    shortcutsfunctions.refreshselectedtable = () => {
+        document.getElementById("inventorydisplay").innerHTML = 
+            "<h1 style='color: black; width: 100%; text-Align: center;'>LOADING</h1>";
+        shortcutsfunctions.refresh(dbselectionobj.currentdbtable);
+    }
+
+    shortcutsfunctions.updatedata = (name) => {
+        let modal = document.getElementById("modal");
+        modal.style.display = "block";
+        modal.appendChild(shortcutsfunctions.update(dbselectionobj.currenttitle,dbselectionobj.currentdbtable, name));
+    }
+
+    shortcutsfunctions.deletedata = (name) => {
+        let modal = document.getElementById("modal");
+        modal.style.display = "block";
+        modal.appendChild(shortcutsfunctions.delete(
+            dbselectionobj.currenttitle, dbselectionobj.currentdbtable, name));
+    }
+
+    shortcutsfunctions.deleteall = () => {
+        //TODO
+        let modal = document.getElementById("modal");
+        modal.style.display = "block";
+        modal.appendChild(shortcutsfunctions.deleteall());
     }
 }());

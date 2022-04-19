@@ -1,110 +1,144 @@
-    * {
-        box-sizing: border-box;
+* {
+    box-sizing: border-box;
+}
+
+html,
+body {
+    margin: 0;
+    padding: 0;
+    height: 100vh;
+    background-color: white;
+    scroll-behavior: smooth;
+}
+
+.content {
+    display: flex;
+    flex-direction: column;
+}
+
+.navbar {
+    position: relative;
+    background-color: lightgreen;
+    padding: 15px;
+    color: black;
+    text-align: center;
+    font-size: 2rem;
+    z-index: 3;
+}
+
+.shortcutscontainer {
+    position: relative;
+    display: flex;
+    border: 2px solid rgb(127, 194, 127);
+    overflow-x: auto;
+
+    background-color: white;
+
+    justify-content: center;
+    -ms-overflow-style: none;  /* IE and Edge */
+    scrollbar-width: none;  /* Firefox */
+}
+
+.shortcutscontainer ::-webkit-scrollbar {
+    display: none;
+}
+
+.sticky {
+    position: sticky;
+    position: -webkit-sticky;
+    z-index: 2;
+    top: 0;
+}
+
+.shortcuts {
+    display: flex;
+    padding: 10px;
+    width: 100%;
+}
+
+@media screen and (min-width: 800px) {
+    .shortcuts{
+        justify-content: center;
     }
-    
-    html,
-    body {
-        margin: 0;
-        padding: 0;
-    }
-    
-    .content {
-        display: flex;
-        flex-direction: column;
-    }
-    
-    .navbar {
-        position: relative;
-        background-color: lightgreen;
-        padding: 15px;
-        color: black;
-        text-align: center;
-        font-size: 2rem;
-        z-index: 2;
-        border-bottom: 1px solid lightgrey;
-    }
-    
-    .shortcutscontainer {
-        position: relative;
-        background-color: white;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        border-bottom: 1px solid lightgrey;
-    }
-    
-    .shortcuts {
-        padding: 15px;
-        width: 100%;
-        height: auto;
-        display: flex;
-        flex-wrap: wrap;
-        align-content: flex-start;
-    }
-    
-    .shortcuts button {
-        width: auto;
-        height: 50px;
-        border: none;
-        border-radius: 2px;
-        background-color: darkgrey;
-        margin: 3px;
-        flex: 1 0 20%;
-    }
-    
-    .displaybutton {
-        border: none;
-        width: 30%;
-        height: 30px;
-        background-color: darkgrey;
-    }
-    
-    .inventorydisplay {
-        position: relative;
-        width: 100%;
-        overflow-x: auto;
-        overflow-y: auto;
-    }
-    
-    .inventorydisplay table {
-        width: 100%;
-        margin-top: 10px;
-        border-collapse: collapse;
-        color: black;
-    }
-    
-    .inventorydisplay table img{
-        width: 100px;
-        height: 100px;
-    }
-    
-    .inventorydisplay td,
-    th {
-        border: 1px solid black;
-        text-align: center;
-        padding: 5px;
-        /*width: 8.33%;*/
-    }
-    
-    .modal {
-        display: none;
-        /* Hidden by default */
-        position: fixed;
-        /* Stay in place */
-        z-index: 3;
-        /* Sit on top */
-        left: 0;
-        top: 30px;
-        width: 100%;
-        /* Full width */
-        overflow: auto;
-        /* Enable scroll if needed */
-        background-color: white;
-    }
-    
-    .modal button {
-        width: 100%;
-        border: none;
-        color: white;
-        background-color: rgb(80, 80, 80);
-    }
+}
+
+.shortcuts button {
+    height: 6vh;
+    border: none;
+    border-radius: 2px;
+    background-color: rgb(127, 194, 127);
+    margin: 3px;
+    flex: 0 0 100px;
+}
+
+.displaybutton {
+    border: none;
+    width: 30%;
+    height: 30px;
+    background-color: rgb(127, 194, 127);
+}
+
+.inventorydisplay {
+    position: relative;
+    width: 100%;
+    overflow-x: auto;
+}
+
+.inventorydisplay table {
+    position: relative;
+    width: 100%;
+    margin-top: 10px;
+    border-collapse: collapse;
+    text-align: center;
+    color: black;
+    overflow-x: auto;
+}
+
+.inventorydisplay table img{
+    width: 100px;
+    height: 100px;
+}
+
+.inventorydisplay table td,
+th {
+    border-top: 2px solid darkseagreen;
+    border-bottom: 2px solid darkseagreen;
+    padding: 5px;
+    width: 8.33%;
+}
+
+.inventorydisplay table thead th {
+    background-color: rgb(176, 255, 176);
+}
+
+.inventorydisplay table td {
+    background-color: rgb(217, 255, 217);
+}
+
+.modal {
+    display: none;
+    /* Hidden by default */
+    position: fixed;
+    /* Stay in place */
+    z-index: 99;
+    /* Sit on top */
+    left: 0;
+    top: 8vh;
+    width: 100%;
+    /* Full width */
+    overflow-y: auto;
+    /* Enable scroll if needed */
+    background-color: white;
+}
+
+.modal button {
+    width: 100%;
+    border: none;
+    color: white;
+    background-color: rgb(80, 80, 80);
+}
+
+.selectedbtabletitle {
+    margin: 0 auto;
+    border-top: 2px solid rgb(80, 80, 80);
+}

@@ -1,0 +1,32 @@
+.dbselection {
+    display: flex;
+    overflow-x: auto;
+    border: 2px solid darkseagreen;
+    border-top: none;
+    box-sizing: border-box;
+    margin-bottom: 12px;
+
+    
+    -ms-overflow-style: none;  /* IE and Edge */
+    scrollbar-width: none;  /* Firefox */
+}
+
+/* Hide scrollbar for Chrome, Safari and Opera */
+.dbselection::-webkit-scrollbar {
+    display: none;
+}
+
+.dbselection button {
+    flex: 0 0 100px;
+    margin: 12px;
+    margin-right: 0px;
+    padding: 0px 10px 0px 10px;
+    background-color: rgb(127, 194, 127);
+    border: none;
+}
+
+@media screen and (min-width: 800px) {
+    .dbselection{
+        justify-content: center;
+    }
+}
