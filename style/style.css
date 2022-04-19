@@ -6,8 +6,6 @@
     body {
         margin: 0;
         padding: 0;
-        height: 100vh;
-        background-color: white;
     }
     
     .content {
@@ -23,6 +21,7 @@
         text-align: center;
         font-size: 2rem;
         z-index: 2;
+        border-bottom: 1px solid lightgrey;
     }
     
     .shortcutscontainer {
@@ -31,8 +30,7 @@
         display: flex;
         flex-direction: column;
         align-items: center;
-        border-top: 2px solid black;
-        border-bottom: 2px solid black;
+        border-bottom: 1px solid lightgrey;
     }
     
     .shortcuts {

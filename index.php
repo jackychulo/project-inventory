@@ -14,7 +14,7 @@
         <nav class="navbar">Inventory</nav>
 
         <section id="modal" class="modal">
-            <button style='padding: 10px 0px 10px 0px;' onclick="modalclose()"> 关闭 </button>
+            <button style='padding: 10px 0px 10px 0px;' onclick="modalclose()"> Close </button>
         </section>
 
         <section id="shortcutscontainer" class="shortcutscontainer">
