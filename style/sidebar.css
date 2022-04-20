@@ -1,7 +1,6 @@
 .sidebar {
     width: 55px;
     height: 100vh;
-    display: flex;
     padding: 0.45rem;
     background-color: black;
 }
@@ -10,9 +9,7 @@
     list-style: none;
     margin: 0px;
     padding: 0px;
-}
-
-.sidebar li{
+    margin-top: 50px;
 }
 
 .sidebar li a{
@@ -22,8 +19,5 @@
     color: white;
     list-style: none;
     font-size: 20px;
-}
-
-.sidebar:hover {
-    width: max-content;
+    margin-bottom: 20px;
 }

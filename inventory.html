@@ -9,6 +9,8 @@
     <link href="style/dbselection.css" rel="stylesheet" type="text/css">
     <link rel="stylesheet" href="style/searchdb.css" class="css">
     <link rel="stylesheet" href="style/sidebar.css">
+    <link rel="stylesheet" href="js/pages/dashboard.css">
+    <link rel="stylesheet" href="js/pages/statistic.css">
 </header>
 
 <body>
@@ -18,18 +20,18 @@
                 <li>
                     <a href="#">
                         <img src="imgs/dashboard_white_24dp.svg" alt="dashboard" width="40px" height="40px">
-                        <span>Dashboard</span>
+                        <!-- <span>Dashboard</span> -->
                     </a>
                 </li>
                 <li>
                     <a href="#">
                         <img src="imgs/dashboard_white_24dp.svg" alt="dashboard" width="40px" height="40px">
-                        <span>Exit</span>
+                        <!-- <span>Exit</span> -->
                     </a>
                 </li>
             </ul>
         </div>
-        <nav class="navbar">Inventory</nav>
+        <div class="content-right"></div>
 
 
         <!-- <section id="modal" class="modal">
@@ -63,14 +65,22 @@
     <script src="js/dbselection.js"></script>
     <script src="js/searchdb.js"></script>
     <script src="js/sidebar.js"></script>
+    <script src="js/pages/dashboard.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js">
+    </script>
+    <script src="js/pages//ntopproductchart.js"></script>
+    <script src="js/pages/statistic.js"></script>
     <script>
-        let dbselectionobj = dbselection();
+        /* let dbselectionobj = dbselection();
         document.getElementById("dbselection").append(dbselectionobj);
 
         let searchdbobj = searchdb();
-        document.getElementById("dbselection").append(searchdbobj);
+        document.getElementById("dbselection").append(searchdbobj); */
 
-        let sc = document.getElementById("shortcutscontainer");
+        document.querySelector(".content-right").append(dashboard());
+
+        /* let sc = document.getElementById("shortcutscontainer");
         let sticky = document.getElementById("shortcutscontainer").offsetTop;
         window.onscroll = () => {
             if (window.pageYOffset >= sticky) {
@@ -78,7 +88,7 @@
             } else {
                 document.getElementById("shortcutscontainer").classList.remove('sticky');
             }
-        }
+        } */
     </script>
 </body>
 

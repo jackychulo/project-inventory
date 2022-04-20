@@ -1,0 +1,12 @@
+.statistic{
+    border: 2px solid red;
+    display: flex;
+    margin: 28px;
+}
+
+.block {
+    flex: 1;
+    background-color: white;
+    border: 1px solid lightgray;
+    border-radius: 2px;
+}
